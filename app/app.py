@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 import yfinance as yf
 import pandas as pd
 from backend.data import get_OHLC, get_option_dates, get_dividend_hist, get_portfolio, get_news, get_risk
@@ -8,8 +8,8 @@ app = Flask(__name__)
 selected_ticker = "MSFT"
 
 @app.route("/")
-def hello():
-    return 'Hello, World!, Welcome to my portfolio project!'
+def home():
+    return render_template('index.html', title='Welcome', username='ryan')
 
 @app.route("/MSFT")
 def msft_data():
