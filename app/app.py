@@ -1,8 +1,7 @@
 from flask import Flask
 import yfinance as yf
 import pandas as pd
-from data import get_OHLC, get_option_dates, get_dividend_hist, get_portfolio, get_news, get_risk
-
+from backend.data import get_OHLC, get_option_dates, get_dividend_hist, get_portfolio, get_news, get_risk
 
 app = Flask(__name__)
 
