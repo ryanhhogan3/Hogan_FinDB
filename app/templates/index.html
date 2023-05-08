@@ -1,10 +1,43 @@
+<!DOCTYPE html>
 <html>
     <head>
-        <title>{{ title }}</title>
+        <title>Hogan Financials</title>
     </head>
     <body>
-        <h1>Hello {{ username }}!</h1>
+        <h1>Hello, welcome to the Hogan Financials app!</h1>
+
+        <ul>
+            <li>
+                <a href="/">Home</a>
+            </li>
+            <li>
+                <a href="/MSFT">Microsoft Data</a>
+            </li>
+            <li>
+                <a href="/options">Options Data</a>
+            </li>
+            <li>
+                <a href="/dividend">Dividend Data</a>
+            </li>
+            <li>
+                <a href="/portfolio">Portfolio</a>
+            </li>
+            <li>
+                <a href="/news">News</a>
+            </li>
+            <li>
+                <a href="/risks">Risk Analysis</a>
+            </li>
+        </ul>
+
+        <p>
+
+            {% block content %}{% endblock %}
+
+
+        </p>
+
+        </div>
     </body>
 </html>
 
-//https://dev.to/brunooliveira/flask-series-part-9-adding-a-navbar-by-using-template-inheritance-2e5o
