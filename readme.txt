@@ -39,3 +39,6 @@ while True:
     print(msg.decode("utf-8"))
     
     
+# UML DIAGRAM
+
+    
