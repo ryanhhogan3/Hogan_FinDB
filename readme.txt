@@ -40,5 +40,5 @@ while True:
     
     
 # UML DIAGRAM
-
+![alt text](images/UML Diagrama Assignment 8.png)
     
