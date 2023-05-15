@@ -1,15 +1,18 @@
 from flask import Flask, render_template
 import yfinance as yf
 import pandas as pd
-from backend.data import get_OHLC, get_option_dates, get_dividend_hist, get_portfolio, get_news, get_risk
+from backend.data import *
 
 app = Flask(__name__)
+
+
 
 selected_ticker = "MSFT"
 
 @app.route("/")
 def home():
-    return render_template('index.html', content="testing")
+
+    return render_template('index.html')
 
 @app.route("/MSFT")
 def msft_data():
@@ -42,5 +45,7 @@ def risk_page():
     html_risks = get_risk()
     return render_template('contentWIP.html', tables=[html_risks.to_html()], titles=[''])
 
+
+
 if __name__ == "__main__":
-    app.run()
+    app.run(app)

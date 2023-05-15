@@ -2,10 +2,19 @@
 <html>
     <head>
         <title>Hogan Financials</title>
+        
     </head>
     <body>
         <h1>Hello, welcome to the Hogan Financials app!</h1>
 
+        <h3>
+            {% block header %}{% endblock %}
+
+        </h3>
+
+
+        <div id="naviagtion">
+        
         <ul>
             <li>
                 <a href="/">Home</a>
@@ -30,7 +39,10 @@
             </li>
         </ul>
 
+    </div>
+
         <p>
+
 
             {% block content %}{% endblock %}
 

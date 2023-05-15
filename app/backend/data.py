@@ -1,5 +1,6 @@
 import yfinance as yf
 import pandas as pd
+import datetime as dt
 
 def get_OHLC(ticker):
     stockobj = yf.Ticker(ticker)
@@ -29,3 +30,6 @@ def get_risk():
     risk_data = pd.read_csv("https://raw.githubusercontent.com/GFDRR/open-risk-data-dashboard/master/backend/contents/countries/country_groups.csv")
     return risk_data
 
+def get_todays_date():
+    today = dt.datetime.today()
+    return today
