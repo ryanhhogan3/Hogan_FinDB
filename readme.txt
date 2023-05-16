@@ -40,5 +40,5 @@ while True:
     
     
 # UML DIAGRAM
-![alt text](images/UML Diagrama Assignment 8.png)
+![alt text](https://github.com/ryanhhogan3/Hogan_FinDB/blob/master/images/UML%20Diagrma%20Assignment%208.png)
     
