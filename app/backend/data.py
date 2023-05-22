@@ -33,3 +33,8 @@ def get_risk():
 def get_todays_date():
     today = dt.datetime.today()
     return today
+
+# def callPyTime():
+#     time= dt.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+#     # print(time)
+#     return time

@@ -2,6 +2,7 @@ from flask import Flask, render_template
 import yfinance as yf
 import pandas as pd
 from backend.data import *
+from getTime import callPyTime
 
 app = Flask(__name__)
 
@@ -12,7 +13,7 @@ selected_ticker = "MSFT"
 @app.route("/")
 def home():
 
-    return render_template('index.html')
+    return render_template('index.html', time=format(dt.datetime.strftime(dt.datetime.now(), "%d %B %Y %X")))
 
 @app.route("/MSFT")
 def msft_data():
@@ -45,7 +46,11 @@ def risk_page():
     html_risks = get_risk()
     return render_template('contentWIP.html', tables=[html_risks.to_html()], titles=[''])
 
+@app.route("/time")
+def getTime():
+    return callPyTime()
+
 
 
 if __name__ == "__main__":
-    app.run(app)
+    app.run(app, debug=True)
