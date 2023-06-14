@@ -7,6 +7,10 @@ def get_OHLC(ticker):
     OHLCV = pd.DataFrame(stockobj.history('1y'))
     return OHLCV
 
+def getLastPrice(ticker):
+    closePrices = get_OHLC(ticker)['Close']
+    return round(closePrices[-1],2)
+
 def get_option_dates(ticker):
     stockobj = yf.Ticker(ticker)
     option_dates = pd.DataFrame(stockobj.options)

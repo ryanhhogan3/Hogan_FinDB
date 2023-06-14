@@ -1,0 +1,86 @@
+{% extends "searchBar.html" %}
+{% block content %} 
+
+
+
+<h2>Stock Search Page</h2>
+<h3>Stock searched for:</h3> 
+<h4> {{ stock_search }} </h4>
+<h3>Price Data:</h3> 
+{% for table in tables %}
+<h2>{{titles[loop.index]}}</h2>                            
+    {{ table|safe }}
+{% endfor %}
+
+<h3>Price Today:</h3>
+<h4> {{ last_price }} </h4>
+
+<h2>Financials of Company selected:</h2>
+
+<script>
+    function getClose(){
+    
+    fetch('http://127.0.0.1:5000/data/msft', {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+            },
+        })
+        .then(response => response.json())
+        .then(response => console.log((response)))
+        let response = response.json()
+        return response
+    }
+</script>
+
+<div>
+    <!-- <link rel="stylesheet"
+          href="bower_components/chartist/dist/chartist.min.css"> -->
+          <script src="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
+
+
+        <div class="ct-chart ct-perfect-fourth" width="500" height="400">
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
+        <script>var data = {
+            labels: ['Week1', 'Week2', 'Week3', 'Week4', 'Week5', 'Week6'],
+            series: [
+              [5, 4, 3, 7, 5, 10],
+              [3, 2, 9, 5, 4, 6],
+              [2, 1, -3, -4, -2, 0]
+            ]
+          };
+          
+          // We are setting a few options for our chart and override the defaults
+          var options = {
+            // Don't draw the line chart points
+            showPoint: false,
+            // Disable line smoothing
+            lineSmooth: false,
+            // X-Axis specific configuration
+            axisX: {
+              // We can disable the grid for this axis
+              showGrid: false,
+              // and also don't show the label
+              showLabel: false
+            },
+            // Y-Axis specific configuration
+            axisY: {
+              // Lets offset the chart a bit from the labels
+              offset: 60,
+              // The label interpolation function enables you to modify the values
+              // used for the labels on each axis. Here we are converting the
+              // values into million pound.
+              labelInterpolationFnc: function(value) {
+                return '$' + value + 'm';
+              }
+            }
+          };
+          
+          // All you need to do is pass your configuration as third parameter to the chart function
+          new Chartist.Line('.ct-chart', data, options);</script>
+          </div>
+
+</div>
+
+
+{% endblock %}

@@ -1,19 +1,41 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, redirect, url_for, jsonify
 import yfinance as yf
 import pandas as pd
 from backend.data import *
+from flask_bootstrap import Bootstrap5
+from flask_wtf import FlaskForm, CSRFProtect
+from wtforms import StringField, SubmitField
+from wtforms.validators import DataRequired, Length
 from getTime import callPyTime
+from flask import request
+import secrets
 
 app = Flask(__name__)
+app.secret_key = 'tO$&!|0wkamvVia0?n$NqIRVWOG'
 
+# Bootstrap-Flask requires this line
+bootstrap = Bootstrap5(app)
+# Flask-WTF requires this line
+csrf = CSRFProtect(app)
 
 
 selected_ticker = "MSFT"
 
 @app.route("/")
 def home():
+    q = request.args.get('query')
+    if q:
+        try:
+            print(q)
+            html_stock_data = get_OHLC(q)
+            return render_template('stockSearch.html', stock_search=q, last_price=getLastPrice(q), tables=[html_stock_data
+                                                                                                           .to_html()], titles=[''])
+        except:
+            print("nothing submited")
+            return render_template('index.html', time=format(dt.datetime.strftime(dt.datetime.now(), "%d %B %Y %X")))
+    else:
+        return render_template('index.html', time=format(dt.datetime.strftime(dt.datetime.now(), "%d %B %Y %X")))
 
-    return render_template('index.html', time=format(dt.datetime.strftime(dt.datetime.now(), "%d %B %Y %X")))
 
 @app.route("/MSFT")
 def msft_data():
@@ -33,8 +55,8 @@ def stock_dividends():
 
 @app.route("/portfolio")
 def portfolio_page():
-    html_portfolio = get_portfolio()
-    return render_template('contentWIP.html', tables=[html_portfolio.to_html()], titles=[''])
+    
+    return 'portfolio page'
 
 @app.route("/news")
 def news_page():
@@ -50,6 +72,26 @@ def risk_page():
 def getTime():
     return callPyTime()
 
+@app.route("/data/<ticker>")
+def getJSONdata(ticker):
+    history = get_OHLC(ticker)['Close']
+    return jsonify(history.to_json(orient='records'))
+
+@app.route("/search")
+def searchBar():
+    q = request.args.get('query')
+    if q:
+        try:
+            print(q)
+            html_stock_data = get_OHLC(q)
+            return render_template('stockSearch.html', stock_search=q, last_price=getLastPrice(q), tables=[html_stock_data.to_html()], titles=[''])
+        except:
+           
+            print("nothing submited")
+            return render_template('searchBar.html')
+    else:
+        print("nothing submited")
+        return render_template('searchBar.html')
 
 
 if __name__ == "__main__":

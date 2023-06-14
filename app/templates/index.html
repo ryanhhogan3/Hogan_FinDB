@@ -6,21 +6,26 @@
         <element onload="callPyTime"></element>
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
         <script async>
-            function callPyTime(){
-                $.ajax({
-                    url: "time",
-                    context: document.body
-                })
-                setTimeout(callPyTime,10000);
-            };
+            function display_time(){
+                let date = new Date()
+                document.getElementById('timeelement').innerHTML = date;
+                display_continuous()
+            }
+            function display_continuous(){
+                let refresh = 1000;
+                mytime = setTimeout('display_time()', refresh);
+            }
 
         </script>
     </head>
-    <body>
+    <body onload=display_time()>
         <h1>Hello, welcome to the Hogan Financials app!</h1>
         <span id="time">
 
             <h3>The current time is: 
+                <span id="timeelement">
+                    <h2>time</h2>
+                </span>
 
                 
             </h3>
@@ -57,6 +62,18 @@
             <li>
                 <a href="/risks">Risk Analysis</a>
             </li>
+            <li>
+                <a href="/search">Search</a>
+            </li>
+            <ul>
+                <h1>Search Bar</h1>
+
+                <form method="GET" class="search-bar">
+                    <input class="search-value-input" placeholder="SEARCH" label="search" type="search" name="query">
+                    <button class="search-button" type="submit">Search</button>
+    
+</form>
+            </ul>
         </ul>
 
     </div>
